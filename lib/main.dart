@@ -1,0 +1,302 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' hide Step;
+import 'package:flutter/services.dart';
+import 'package:survey_kit/survey_kit.dart';
+
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.white,
+  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: Align(
+            alignment: Alignment.center,
+            child: FutureBuilder<Task>(
+              future: getJsonTask(),
+              builder: (BuildContext context, AsyncSnapshot<Task> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasData &&
+                    snapshot.data != null) {
+                  final Task task = snapshot.data!;
+                  return SurveyKit(
+                    onResult: (SurveyResult result) {
+                      print(result.finishReason);
+                      Navigator.pushNamed(context, '/');
+                    },
+                    task: task,
+                    showProgress: true,
+                    localizations: const <String, String>{
+                      'cancel': 'Cancel',
+                      'next': 'Next',
+                    },
+                    themeData: Theme.of(context).copyWith(
+                      primaryColor: Colors.red,
+                      appBarTheme: const AppBarTheme(
+                        color: Colors.white,
+                        iconTheme: IconThemeData(
+                          color: Colors.red,
+                        ),
+                        titleTextStyle: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                      iconTheme: const IconThemeData(
+                        color: Color.fromARGB(255, 133, 81, 13),
+                      ),
+                      textSelectionTheme: const TextSelectionThemeData(
+                        cursorColor: Colors.red,
+                        selectionColor: Colors.red,
+                        selectionHandleColor: Colors.red,
+                      ),
+                      cupertinoOverrideTheme: const CupertinoThemeData(
+                        primaryColor: Colors.red,
+                      ),
+                      outlinedButtonTheme: OutlinedButtonThemeData(
+                        style: ButtonStyle(
+                          minimumSize: WidgetStateProperty.all(
+                            const Size(150.0, 60.0),
+                          ),
+                          side: WidgetStateProperty.resolveWith(
+                            (Set<WidgetState> state) {
+                              if (state.contains(WidgetState.disabled)) {
+                                return const BorderSide(
+                                  color: Colors.grey,
+                                );
+                              }
+                              return const BorderSide(
+                                color: Colors.red,
+                              );
+                            },
+                          ),
+                          shape: WidgetStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          textStyle: WidgetStateProperty.resolveWith(
+                            (Set<WidgetState> state) {
+                              if (state.contains(WidgetState.disabled)) {
+                                return Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                      color: Colors.grey,
+                                    );
+                              }
+                              return Theme.of(context)
+                                  .textTheme
+                                  .labelLarge
+                                  ?.copyWith(
+                                    color: Colors.red,
+                                  );
+                            },
+                          ),
+                        ),
+                      ),
+                      textButtonTheme: TextButtonThemeData(
+                        style: ButtonStyle(
+                          textStyle: WidgetStateProperty.all(
+                            Theme.of(context).textTheme.labelLarge?.copyWith(
+                                  color: Colors.red,
+                                ),
+                          ),
+                        ),
+                      ),
+                      textTheme: const TextTheme(
+                        displayMedium: TextStyle(
+                          fontSize: 28.0,
+                          color: Colors.black,
+                        ),
+                        headlineSmall: TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.black,
+                        ),
+                        bodyMedium: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                        bodySmall: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.black,
+                        ),
+                        titleMedium: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                      inputDecorationTheme: const InputDecorationTheme(
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      colorScheme: ColorScheme.fromSwatch(
+                        primarySwatch: Colors.red,
+                      )
+                          .copyWith(
+                            onPrimary: Colors.white,
+                          )
+                          .copyWith(surface: Colors.white),
+                    ),
+                    surveyProgressbarConfiguration: SurveyProgressConfiguration(
+                      backgroundColor: Colors.white,
+                    ),
+                  );
+                }
+                return const CircularProgressIndicator.adaptive();
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<Task> getSampleTask() {
+    final NavigableTask task = NavigableTask(
+      id: TaskIdentifier(),
+      steps: <Step>[
+        InstructionStep(
+          title: 'Bienvenue!',
+          text: 'Quelles sont les chances de trouver le partenaire de mes rêves ?',
+          buttonText: 'Let\'s go!',
+        ),
+        QuestionStep(
+          title: 'Quel est ton nom?',
+          answerFormat: const IntegerAnswerFormat(
+            defaultValue: 25,
+            hint: 'Entrer votre nom',
+          ),
+          isOptional: true,
+        ),
+        QuestionStep(
+          title: 'Medication?',
+          text: 'Are you using any medication',
+          answerFormat: const BooleanAnswerFormat(
+            positiveAnswer: 'Yes',
+            negativeAnswer: 'No',
+            result: BooleanResult.POSITIVE,
+          ),
+        ),
+        QuestionStep(
+          title: 'Tell us about you',
+          text:
+              'Tell us about yourself and why you want to improve your health.',
+          answerFormat: const TextAnswerFormat(
+            maxLines: 5,
+            validationRegEx: r'^(?!\s*\$).+',
+          ),
+        ),
+        QuestionStep(
+          title: 'Selectionner',
+          answerFormat: const ScaleAnswerFormat(
+            step: 1,
+            minimumValue: 1,
+            maximumValue: 5,
+            defaultValue: 3,
+            minimumValueDescription: '1',
+            maximumValueDescription: '5',
+          ),
+        ),
+        QuestionStep(
+          title: 'Known allergies',
+          text: 'Do you have any allergies that we should be aware of?',
+          isOptional: false,
+          answerFormat: const MultipleChoiceAnswerFormat(
+            textChoices: <TextChoice>[
+              TextChoice(text: 'Penicillin', value: 'Penicillin'),
+              TextChoice(text: 'Latex', value: 'Latex'),
+              TextChoice(text: 'Pet', value: 'Pet'),
+              TextChoice(text: 'Pollen', value: 'Pollen'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          title: 'Done?',
+          text: 'We are done, do you mind to tell us more about yourself?',
+          isOptional: true,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: <TextChoice>[
+              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'No', value: 'No'),
+            ],
+            defaultSelection: TextChoice(text: 'No', value: 'No'),
+          ),
+        ),
+        QuestionStep(
+          title: 'When did you wake up?',
+          answerFormat: const TimeAnswerFormat(
+            defaultValue: TimeOfDay(
+              hour: 12,
+              minute: 0,
+            ),
+          ),
+        ),
+        QuestionStep(
+          title: 'When was your last holiday?',
+          answerFormat: DateAnswerFormat(
+            minDate: DateTime.utc(1970),
+            defaultDate: DateTime.now(),
+            maxDate: DateTime.now(),
+          ),
+        ),
+        QuestionStep(
+          title: 'Upload a image of you',
+          answerFormat: const ImageAnswerFormat(
+            buttonText: 'Upload your photo',
+            useGallery: true,
+          ),
+        ),
+        CompletionStep(
+          stepIdentifier: StepIdentifier(id: '321'),
+          text: 'Thanks for taking the survey, we will contact you soon!',
+          title: 'Done!',
+          buttonText: 'Submit survey',
+        ),
+      ],
+    );
+    task.addNavigationRule(
+      forTriggerStepIdentifier: task.steps[6].stepIdentifier,
+      navigationRule: ConditionalNavigationRule(
+        resultToStepIdentifierMapper: (String? input) {
+          switch (input) {
+            case 'Yes':
+              return task.steps[0].stepIdentifier;
+            case 'No':
+              return task.steps[7].stepIdentifier;
+            default:
+              return null;
+          }
+        },
+      ),
+    );
+    return Future<Task>.value(task);
+  }
+
+  Future<Task> getJsonTask() async {
+    try {
+      final String taskJson =
+          await rootBundle.loadString('assets/example_json.json');
+      final Map<String, dynamic> taskMap = json.decode(taskJson);
+
+      return Task.fromJson(taskMap);
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
