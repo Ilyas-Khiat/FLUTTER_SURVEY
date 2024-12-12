@@ -1,14 +1,15 @@
 {
     "id": "123",
     "type": "navigable",
-    "rules": [{
+    "rules": [
+        {
             "type": "conditional",
             "triggerStepIdentifier": {
                 "id": "2"
             },
             "values": {
-                "Homme": "3",
-                "Femme": "3"
+                "Homme": "31",
+                "Femme": "32"
             }
         },
         {
@@ -23,20 +24,129 @@
         {
             "type": "direct",
             "triggerStepIdentifier": {
-                "id": "11"
+                "id": "31"
             },
-            "destinationStepIdentifier": {
-                "id": "7"
+            "destinationStepIdentifier":{
+                "id": "331"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "331"
+            },
+            "destinationStepIdentifier":{
+                "id": "81"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "32"
+            },
+            "destinationStepIdentifier":{
+                "id": "332"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "332"
+            },
+            "destinationStepIdentifier":{
+                "id": "82"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "81"
+            },
+            "destinationStepIdentifier":{
+                "id": "41"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "82"
+            },
+            "destinationStepIdentifier":{
+                "id": "42"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "41"
+            },
+            "destinationStepIdentifier":{
+                "id": "51"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "42"
+            },
+            "destinationStepIdentifier":{
+                "id": "52"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "52"
+            },
+            "destinationStepIdentifier":{
+                "id": "92"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "92"
+            },
+            "destinationStepIdentifier":{
+                "id": "62"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "51"
+            },
+            "destinationStepIdentifier":{
+                "id": "91"
+            }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "91"
+            },
+            "destinationStepIdentifier":{
+                "id": "101"
+            }
+        },
+        {
+            "type": "conditional",
+            "triggerStepIdentifier": {
+                "id": "101"
+            },
+            "values": {
+                "Oui": "61"
             }
         }
     ],
-    "steps": [{
+    "steps": [
+        {
             "stepIdentifier": {
                 "id": "1"
             },
             "type": "intro",
-            "title": "Evaluez vos standards!",
-            "text": "Decouvrez vos chances de trouver le partenaire de vos reves",
+            "title": "Évaluez vos standards!",
+            "text": "Découvrez vos chances de trouver le partenaire de vos rêves",
             "buttonText": "Let's go!"
         },
         {
@@ -55,10 +165,10 @@
         },
         {
             "stepIdentifier": {
-                "id": "3"
+                "id": "31"
             },
             "type": "question",
-            "title": "L'age minimal de votre partenaire ?",
+            "title": "L'âge minimal de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
@@ -71,13 +181,102 @@
         },
         {
             "stepIdentifier": {
-                "id": "4"
+                "id": "331"
             },
             "type": "question",
-            "title": "Region de votre partenaire ?",
+            "title": "L'âge maximal de votre partenaire ?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 18,
+                "maximumValue": 80,
+                "defaultValue": 25,
+                "minimumValueDescription": "18",
+                "maximumValueDescription": "80"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "32"
+            },
+            "type": "question",
+            "title": "L'âge minimal de votre partenaire ?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 18,
+                "maximumValue": 80,
+                "defaultValue": 25,
+                "minimumValueDescription": "18",
+                "maximumValueDescription": "80"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "332"
+            },
+            "type": "question",
+            "title": "L'âge maximal de votre partenaire ?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 18,
+                "maximumValue": 80,
+                "defaultValue": 25,
+                "minimumValueDescription": "18",
+                "maximumValueDescription": "80"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "81"
+            },
+            "type": "question",
+            "title": "Est-ce que vous avez des exceptions ?",
             "answerFormat": {
                 "type": "multiple",
-                "textChoices": [{
+                "textChoices": [
+                    {
+                        "text": "Exclure les personnes déjà mariées",
+                        "value": "Exclure les personnes déjà mariées"
+                    },
+                    {
+                        "text": "Pas d'exception",
+                        "value": "Pas d'exception"
+                    }
+                ]    
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "82"
+            },
+            "type": "question",
+            "title": "Est-ce que vous avez des exceptions ?",
+            "answerFormat": {
+                "type": "multiple",
+                "textChoices": [
+                    {
+                        "text": "Exclure les personnes déjà mariées",
+                        "value": "Exclure les personnes déjà mariées"
+                    },
+                    {
+                        "text": "Pas d'exception",
+                        "value": "Pas d'exception"
+                    }
+                ]    
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "41"
+            },
+            "type": "question",
+            "title": "Région de votre partenaire ?",
+            "answerFormat": {
+                "type": "multiple",
+                "textChoices": [
+                    {
                         "text": "SUD de la France",
                         "value": "SUD de la France"
                     },
@@ -102,10 +301,42 @@
         },
         {
             "stepIdentifier": {
-                "id": "5"
+                "id": "42"
             },
             "type": "question",
-            "title": "La taille ideale de votre partenaire ?",
+            "title": "Région de votre partenaire ?",
+            "answerFormat": {
+                "type": "multiple",
+                "textChoices": [
+                    {
+                        "text": "SUD de la France",
+                        "value": "SUD de la France"
+                    },
+                    {
+                        "text": "NORD de la France",
+                        "value": "NORD de la France"
+                    },
+                    {
+                        "text": "EST de la France",
+                        "value": "EST de la France"
+                    },
+                    {
+                        "text": "OUEST de la France",
+                        "value": "OUEST de la France"
+                    },
+                    {
+                        "text": "France d'outre-mer",
+                        "value": "France d'outre-mer"
+                    }
+                ]
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "51"
+            },
+            "type": "question",
+            "title": "La taille idéale de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
@@ -118,10 +349,79 @@
         },
         {
             "stepIdentifier": {
-                "id": "6"
+                "id": "52"
             },
             "type": "question",
-            "title": "Le revenu minimal annuel de votre partenaire de reve ?",
+            "title": "La taille idéale de votre partenaire ?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 100,
+                "maximumValue": 210,
+                "defaultValue": 176,
+                "minimumValueDescription": "<100cm",
+                "maximumValueDescription": ">210cm"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "91"
+            },
+            "type": "question",
+            "title": "Est-ce que vous avez des exceptions ?",
+            "answerFormat": {
+                "type": "multiple",
+                "textChoices": [
+                    {
+                        "text": "Exclure les personnes obéses",
+                        "value": "Exclure les personnes obéses"
+                    },
+                    {
+                        "text": "Pas d'exception",
+                        "value": "Pas d'exception"
+                    }
+                ]    
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "92"
+            },
+            "type": "question",
+            "title": "Est-ce que vous avez des exceptions ?",
+            "answerFormat": {
+                "type": "multiple",
+                "textChoices": [
+                    {
+                        "text": "Exclure les personnes obéses",
+                        "value": "Exclure les personnes obéses"
+                    },
+                    {
+                        "text": "Pas d'exception",
+                        "value": "Pas d'exception"
+                    }
+                ]   
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "101"
+            },
+            "type": "question",
+            "title": "Est-ce que le revenu annuel de votre partenaire de rêve vous intéresse ?",
+            "answerFormat": {
+                "type": "bool",
+                "positiveAnswer": "Oui",
+                "negativeAnswer": "Non",
+                "result": "POSITIVE"
+            }
+        },
+        {
+            "stepIdentifier": {
+                "id": "61"
+            },
+            "type": "question",
+            "title": "Le revenu minimal annuel de votre partenaire de rêve ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
@@ -134,17 +434,18 @@
         },
         {
             "stepIdentifier": {
-                "id": "7"
+                "id": "62"
             },
             "type": "question",
-            "title": "La photo de votre partenaire de reve ? \n ( star , acteur , chanteur , crush du lycée , etc... )",
+            "title": "Le revenu minimal annuel de votre partenaire de rêve ?",
             "answerFormat": {
-                "type": "file",
-                "defaultValue": "https://www.maxicolor.com.br/wp-content/uploads/2019/11/placeholder-3x4-450x600.jpg",
-                "buttonText": "Charger la photo",
-                "useGallery": true,
-                "hintImage": "https://www.maxicolor.com.br/wp-content/uploads/2019/11/placeholder-3x4-450x600.jpg",
-                "hintTitle": "How the image should look"
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 0,
+                "maximumValue": 100000,
+                "defaultValue": 40000,
+                "minimumValueDescription": "0 euros",
+                "maximumValueDescription": "<100k euros"
             }
         }
     ]

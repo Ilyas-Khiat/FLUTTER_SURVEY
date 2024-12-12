@@ -543,9 +543,10 @@ packages:
   survey_kit:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: survey_kit
+      sha256: "3e224786905bbfb9a3bde53faf8e5a43b42f2771b4f9ad0fe261465ffd36aa93"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.2.1"
   sync_http:
     dependency: transitive
