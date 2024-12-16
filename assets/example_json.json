@@ -1,151 +1,175 @@
 {
     "id": "123",
     "type": "navigable",
-    "rules": [{
+    "rules": [
+        {
             "type": "conditional",
-            "triggerStepIdentifier": {
-                "id": "2"
-            },
+            "triggerStepIdentifier": { "id": "2" },
             "values": {
-                "Homme": "3",
-                "Femme": "3"
+                "Homme": "31",
+                "Femme": "32"
             }
         },
         {
             "type": "direct",
-            "triggerStepIdentifier": {
-                "id": "1"
-            },
-            "destinationStepIdentifier": {
-                "id": "2"
-            }
+            "triggerStepIdentifier": { "id": "31" },
+            "destinationStepIdentifier": { "id": "331" }
         },
         {
             "type": "direct",
-            "triggerStepIdentifier": {
-                "id": "11"
-            },
-            "destinationStepIdentifier": {
-                "id": "7"
+            "triggerStepIdentifier": { "id": "32" },
+            "destinationStepIdentifier": { "id": "332" }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": { "id": "331" },
+            "destinationStepIdentifier": { "id": "41" }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": { "id": "332" },
+            "destinationStepIdentifier": { "id": "41" }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": { "id": "41" },
+            "destinationStepIdentifier": { "id": "51" }
+        },
+        {
+            "type": "direct",
+            "triggerStepIdentifier": { "id": "51" },
+            "destinationStepIdentifier": { "id": "101" }
+        },
+        {
+            "type": "conditional",
+            "triggerStepIdentifier": { "id": "101" },
+            "values": {
+                "Oui": "61",
+                "Non": "completion"
             }
         }
     ],
-    "steps": [{
-            "stepIdentifier": {
-                "id": "1"
-            },
+    "steps": [
+        {
+            "stepIdentifier": { "id": "1" },
             "type": "intro",
-            "title": "Evaluez vos standards!",
-            "text": "Decouvrez vos chances de trouver le partenaire de vos reves",
+            "title": "Évaluez vos standards!",
+            "text": "Découvrez vos chances de trouver le partenaire de vos rêves",
             "buttonText": "Let's go!"
         },
         {
-            "stepIdentifier": {
-                "id": "2"
-            },
+            "stepIdentifier": { "id": "2" },
             "type": "question",
             "title": "GENRE ?",
             "text": "Homme ou Femme ?",
             "answerFormat": {
                 "type": "bool",
                 "positiveAnswer": "Homme",
-                "negativeAnswer": "Femme",
-                "result": "POSITIVE"
+                "negativeAnswer": "Femme"
             }
         },
         {
-            "stepIdentifier": {
-                "id": "3"
-            },
+            "stepIdentifier": { "id": "31" },
             "type": "question",
-            "title": "L'age minimal de votre partenaire ?",
+            "title": "Homme: L'âge minimal de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
                 "minimumValue": 18,
                 "maximumValue": 80,
-                "defaultValue": 25,
-                "minimumValueDescription": "18",
-                "maximumValueDescription": "80"
+                "defaultValue": 25
             }
         },
         {
-            "stepIdentifier": {
-                "id": "4"
-            },
+            "stepIdentifier": { "id": "32" },
             "type": "question",
-            "title": "Region de votre partenaire ?",
+            "title": "Femme: L'âge minimal de votre partenaire ?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 18,
+                "maximumValue": 80,
+                "defaultValue": 25
+            }
+        },
+        {
+            "stepIdentifier": { "id": "331" },
+            "type": "question",
+            "title": "Homme: L'âge maximal de votre partenaire ?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 18,
+                "maximumValue": 80,
+                "defaultValue": 30
+            }
+        },
+        {
+            "stepIdentifier": { "id": "332" },
+            "type": "question",
+            "title": "Femme: L'âge maximal de votre partenaire ?",
+            "answerFormat": {
+                "type": "scale",
+                "step": 1,
+                "minimumValue": 18,
+                "maximumValue": 80,
+                "defaultValue": 30
+            }
+        },
+        {
+            "stepIdentifier": { "id": "41" },
+            "type": "question",
+            "title": "Région de votre partenaire ?",
             "answerFormat": {
                 "type": "multiple",
-                "textChoices": [{
-                        "text": "SUD de la France",
-                        "value": "SUD de la France"
-                    },
-                    {
-                        "text": "NORD de la France",
-                        "value": "NORD de la France"
-                    },
-                    {
-                        "text": "EST de la France",
-                        "value": "EST de la France"
-                    },
-                    {
-                        "text": "OUEST de la France",
-                        "value": "OUEST de la France"
-                    },
-                    {
-                        "text": "France d'outre-mer",
-                        "value": "France d'outre-mer"
-                    }
+                "textChoices": [
+                    { "text": "SUD de la France", "value": "SUD" },
+                    { "text": "NORD de la France", "value": "NORD" },
+                    { "text": "EST de la France", "value": "EST" },
+                    { "text": "OUEST de la France", "value": "OUEST" }
                 ]
             }
         },
         {
-            "stepIdentifier": {
-                "id": "5"
-            },
+            "stepIdentifier": { "id": "51" },
             "type": "question",
-            "title": "La taille ideale de votre partenaire ?",
+            "title": "La taille idéale de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
                 "minimumValue": 100,
                 "maximumValue": 210,
-                "defaultValue": 176,
-                "minimumValueDescription": "<100cm",
-                "maximumValueDescription": ">210cm"
+                "defaultValue": 176
             }
         },
         {
-            "stepIdentifier": {
-                "id": "6"
-            },
+            "stepIdentifier": { "id": "101" },
             "type": "question",
-            "title": "Le revenu minimal annuel de votre partenaire de reve ?",
+            "title": "Est-ce que le revenu annuel de votre partenaire vous intéresse ?",
+            "answerFormat": {
+                "type": "bool",
+                "positiveAnswer": "Oui",
+                "negativeAnswer": "Non"
+            }
+        },
+        {
+            "stepIdentifier": { "id": "61" },
+            "type": "question",
+            "title": "Quel est le revenu minimal annuel de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
                 "minimumValue": 0,
                 "maximumValue": 100000,
-                "defaultValue": 40000,
-                "minimumValueDescription": "0 euros",
-                "maximumValueDescription": "<100k euros"
+                "defaultValue": 40000
             }
         },
         {
-            "stepIdentifier": {
-                "id": "7"
-            },
-            "type": "question",
-            "title": "La photo de votre partenaire de reve ? \n ( star , acteur , chanteur , crush du lycée , etc... )",
-            "answerFormat": {
-                "type": "file",
-                "defaultValue": "https://www.maxicolor.com.br/wp-content/uploads/2019/11/placeholder-3x4-450x600.jpg",
-                "buttonText": "Charger la photo",
-                "useGallery": true,
-                "hintImage": "https://www.maxicolor.com.br/wp-content/uploads/2019/11/placeholder-3x4-450x600.jpg",
-                "hintTitle": "How the image should look"
-            }
+            "stepIdentifier": { "id": "completion" },
+            "type": "completion",
+            "title": "Terminé!",
+            "text": "Merci pour votre participation!",
+            "buttonText": "Terminer"
         }
     ]
 }
