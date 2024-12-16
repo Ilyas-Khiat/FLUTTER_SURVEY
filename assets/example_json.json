@@ -130,12 +130,22 @@
             }
         },
         {
+            "type": "direct",
+            "triggerStepIdentifier": {
+                "id": "61"
+            },
+            "destinationStepIdentifier":{
+                "id": " "
+            }
+        },
+        {
             "type": "conditional",
             "triggerStepIdentifier": {
                 "id": "101"
             },
             "values": {
-                "Oui": "61"
+                "Oui": "61",
+                "Non": " "
             }
         }
     ],
@@ -234,7 +244,7 @@
             "type": "question",
             "title": "Est-ce que vous avez des exceptions ?",
             "answerFormat": {
-                "type": "multiple",
+                "type": "single",
                 "textChoices": [
                     {
                         "text": "Exclure les personnes déjà mariées",
@@ -254,7 +264,7 @@
             "type": "question",
             "title": "Est-ce que vous avez des exceptions ?",
             "answerFormat": {
-                "type": "multiple",
+                "type": "single",
                 "textChoices": [
                     {
                         "text": "Exclure les personnes déjà mariées",
@@ -370,7 +380,7 @@
             "type": "question",
             "title": "Est-ce que vous avez des exceptions ?",
             "answerFormat": {
-                "type": "multiple",
+                "type": "single",
                 "textChoices": [
                     {
                         "text": "Exclure les personnes obéses",
@@ -390,7 +400,7 @@
             "type": "question",
             "title": "Est-ce que vous avez des exceptions ?",
             "answerFormat": {
-                "type": "multiple",
+                "type": "single",
                 "textChoices": [
                     {
                         "text": "Exclure les personnes obéses",
