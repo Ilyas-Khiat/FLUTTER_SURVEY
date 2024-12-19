@@ -60,7 +60,7 @@
         {
             "stepIdentifier": { "id": "2" },
             "type": "question",
-            "title": "GENRE ?",
+            "title": "Précisez votre genre ?",
             "text": "Homme ou Femme ?",
             "answerFormat": {
                 "type": "bool",
@@ -71,7 +71,7 @@
         {
             "stepIdentifier": { "id": "31" },
             "type": "question",
-            "title": "Homme: L'âge minimal de votre partenaire ?",
+            "title": "L'âge minimal de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
@@ -83,7 +83,7 @@
         {
             "stepIdentifier": { "id": "32" },
             "type": "question",
-            "title": "Femme: L'âge minimal de votre partenaire ?",
+            "title": "L'âge minimal de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
@@ -95,7 +95,7 @@
         {
             "stepIdentifier": { "id": "331" },
             "type": "question",
-            "title": "Homme: L'âge maximal de votre partenaire ?",
+            "title": "L'âge maximal de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,
@@ -107,7 +107,7 @@
         {
             "stepIdentifier": { "id": "332" },
             "type": "question",
-            "title": "Femme: L'âge maximal de votre partenaire ?",
+            "title": "L'âge maximal de votre partenaire ?",
             "answerFormat": {
                 "type": "scale",
                 "step": 1,

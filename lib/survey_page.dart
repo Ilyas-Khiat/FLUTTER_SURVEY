@@ -127,10 +127,8 @@ class _SurveyPageState extends State<SurveyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Survey'),
-        backgroundColor: Colors.red,
-      ),
+      backgroundColor: const Color.fromARGB(255, 209, 206, 223), // Couleur de fond pastel
+            
       body: FutureBuilder<survey_kit.NavigableTask>(
         future: _taskFuture,
         builder: (context, snapshot) {

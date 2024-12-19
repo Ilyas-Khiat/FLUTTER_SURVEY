@@ -68,67 +68,101 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Authentication'),
-        backgroundColor: Colors.redAccent,
-      ),
+      backgroundColor: const Color(0xFFF7F8FA), // Couleur de fond pastel
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
-                    Text(
-                      isLogin ? 'Connexion' : 'Inscription',
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
+                    // Ajout du logo
+                    Image.asset(
+                      'assets/logo.png', // Chemin du logo (placez l'image dans "assets")
+                      width: 120,
+                      height: 120,
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Text(
+                        isLogin ? 'Connexion' : 'Inscription',
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF6C63FF), // Couleur douce violette
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 20),
                     TextField(
                       controller: emailController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Email',
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.email, color: Color.fromARGB(255, 89, 85, 90)),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 20),
                     TextField(
                       controller: passwordController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Mot de passe',
-                        prefixIcon: Icon(Icons.lock),
-                        border: OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.lock, color: Color.fromARGB(255, 89, 85, 90)),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide.none,
+                        ),
                       ),
                       obscureText: true,
                     ),
                     const SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: isLogin ? login : register,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 50, vertical: 12),
-                        backgroundColor: Colors.redAccent,
-                        foregroundColor: Colors.white,
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: isLogin ? login : register,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 60, vertical: 14),
+                          backgroundColor: const Color(0xFF6C63FF),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          elevation: 5,
+                        ),
+                        child: Text(
+                          isLogin ? 'Se connecter' : 'S\'inscrire',
+                          style: const TextStyle(fontSize: 18),
+                        ),
                       ),
-                      child: Text(isLogin ? 'Se Connecter' : 'S\'Inscrire'),
                     ),
                     const SizedBox(height: 20),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          isLogin = !isLogin;
-                        });
-                      },
-                      child: Text(
-                        isLogin
-                            ? "Pas encore de compte ? Inscrivez-vous"
-                            : "Déjà un compte ? Connectez-vous",
-                        style: const TextStyle(color: Colors.redAccent),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            isLogin = !isLogin;
+                          });
+                        },
+                        child: Text(
+                          isLogin
+                              ? "Vous n'avez pas encore de compte ? Inscrivez-vous"
+                              : "Vous avez déjà un compte ? Connectez-vous",
+                          style: const TextStyle(
+                            color: Color(0xFF6C63FF),
+                            fontSize: 14,
+                          ),
+                        ),
                       ),
                     ),
                   ],

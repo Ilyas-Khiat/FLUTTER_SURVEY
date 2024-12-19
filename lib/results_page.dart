@@ -30,15 +30,13 @@ class ResultsPage extends StatelessWidget {
         answers.firstWhere((e) => e['stepId'] == '61', orElse: () => {});
     final revenu = revenuEntry['answer'] ?? '...';
 
-    final random = Random();
-    final probabilite = random.nextInt(101); // Probabilité entre 0 et 100
-    double delusion = 0.5;
+    final taillePourcentage = ((double.tryParse(taille) ?? 0) / 200) ;
+    final revenuPourcentage = (1 - (double.tryParse(revenu) ?? 0) / 100000) ;
+    print("Taille : $taillePourcentage, Revenu : $revenuPourcentage");
+    final probabilite = revenuPourcentage*taillePourcentage*100; // Probabilité entre 0 et 100
+    double delusion = 1 - (probabilite / 100);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Résultats'),
-        backgroundColor: Colors.redAccent,
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -47,7 +45,7 @@ class ResultsPage extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
               Text(
-                "Votre Probabilité de Trouver le Partenaire de Rêve",
+                "Votre probabilité de trouver le partenaire de vos rêve :",
                 textAlign: TextAlign.center,
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -55,7 +53,7 @@ class ResultsPage extends StatelessWidget {
               const SizedBox(height: 20),
               CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.blueAccent.withOpacity(0.2),
+                backgroundColor: const Color.fromARGB(255, 145, 136, 161).withOpacity(0.2),
                 child: Icon(
                   genre == 'Homme' ? Icons.male : Icons.female,
                   size: 60,
@@ -65,11 +63,11 @@ class ResultsPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                "Probabilité : $probabilite%",
+                "Probabilité : ${probabilite.toStringAsFixed(2)}%",
                 style: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green),
+                    color: Color.fromARGB(255, 65, 86, 202)),
               ),
               const SizedBox(height: 20),
               _buildDelusionSlider(delusion),
@@ -83,7 +81,7 @@ class ResultsPage extends StatelessWidget {
                 icon: const Icon(Icons.check),
                 label: const Text("Terminer"),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
+                  backgroundColor: Color(0xFF6C63FF),
                   foregroundColor: Colors.white,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
@@ -102,7 +100,7 @@ class ResultsPage extends StatelessWidget {
     return Column(
       children: [
         const Text(
-          "Degré de Confiance / Réalisme",
+          "Degré d'illusion",
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 10),
@@ -111,12 +109,7 @@ class ResultsPage extends StatelessWidget {
           onChanged: (_) {},
           min: 0,
           max: 1,
-          activeColor: Colors.redAccent,
-        ),
-        const Text(
-          "Déplacez le curseur pour ajuster votre niveau d'optimisme.",
-          style: TextStyle(fontSize: 14, color: Colors.grey),
-          textAlign: TextAlign.center,
+          activeColor: const Color.fromARGB(255, 101, 100, 112),
         ),
       ],
     );
@@ -133,7 +126,7 @@ class ResultsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildResultRow(Icons.person, "Genre", genre),
-            _buildResultRow(Icons.cake, "Âge", age),
+            _buildResultRow(Icons.cake, "Âge minimal", age),
             _buildResultRow(Icons.location_on, "Région", region),
             _buildResultRow(Icons.height, "Taille idéale", "$taille cm"),
             _buildResultRow(
@@ -149,7 +142,7 @@ class ResultsPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
-          Icon(icon, color: Colors.redAccent),
+          Icon(icon, color: Color(0xFF6C63FF)),
           const SizedBox(width: 10),
           Text(
             "$label : ",
